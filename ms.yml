@@ -1,4 +1,5 @@
 # Define parameters for a mu pipeline
+/Users/arin/Google Drive/terraform
 # https://github.com/stelligent/mu/wiki/Pipelines
 
 ## See https://github.com/stelligent/mu/wiki/Environments
@@ -9,7 +10,7 @@ environments:
     #### Name of EC2 keypair to associate with ECS container instances.
     #### Launches bastion host if defined.
     #### (default: none)
-    keyName: mu-wordpress
+    keyName: ms-wordpress
 
     #### The instance type to use for the ECS container instances
     #### (default: t2.micro)
@@ -17,12 +18,12 @@ environments:
 
 - name: prod
   cluster:
-    keyName: mu-wordpress
+    keyName: ms-wordpress
     instanceType: t2.small
 
 ## See https://github.com/stelligent/mu/wiki/Services
 service:
-  name: mu-wordpress
+  name: ms-wordpress
 
   ### The desired number of tasks to run for the service
   ### (default: 2)
@@ -50,15 +51,15 @@ service:
   ### See https://github.com/stelligent/mu/wiki/Databases
   database:
     #### Name of database to create on RDS instance
-    name: muwp
+    name: mswp
 
     #### RDS engine to use
     #### (default: aurora)
-    #engine: mysql
+    engine: mariadb
 
     #### Instance class
     #### (default: db.t2.small)
-    #instanceClass: db.t2.small
+    instanceClass: db.t2.small
 
   ### Environment variables exposed to the containers running in ECS
   environment:
@@ -79,6 +80,7 @@ service:
       #### GitHub or CodeCommit
       #### (default: GitHub)
       provider: GitHub
+      repo: aekandem/mu-wordpress
 
       #### The GitHub repo slug or CodeCommit repo name to build
       #### (default: none)
